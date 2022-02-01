@@ -1,0 +1,9 @@
+.idea/*
+.gradle
+build
+data
+.DS_Store
+gradle.properties
+
+!.idea/runConfigurations
+!.idea/runConfigurations/*.xml
