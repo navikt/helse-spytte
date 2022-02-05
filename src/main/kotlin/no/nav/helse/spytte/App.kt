@@ -17,6 +17,9 @@ private val log = LoggerFactory.getLogger("no.nav.helse.spytte.App")
 /**
  * Sette offsets basert på tid, f.eks. til 1. desember 2021:
  * setOffset(factory, "min-consumer-gruppe", "tbd.rapid.v1", LocalDateTime.of(2021, 12, 1, 0, 0, 0))
+ *
+ * Husk å scale ned poddene først!
+ * k scale deployment/minapp --replicas=0 -n tbd
  */
 private fun setOffset(factory: ConsumerProducerFactory, consumerGroup: String, topic: String, time: LocalDateTime) {
     RapidsCliApplication(factory)
