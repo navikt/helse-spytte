@@ -22,14 +22,28 @@ k get secret aiven-spesialist-jgtwydre -n tbd -o jsonpath='{.data.client\.keysto
 k get secret aiven-spesialist-jgtwydre -n tbd -o jsonpath='{.data.client\.truststore\.jks}' | base64 -D > data/truststore-dev.jks
 ```
 
+#### Sørg for tilgang til topic
+Sørg for at appen du later som at du kjører som har tilgang til å lese eller lese og skrive til ønsket topic.
+
+### Klar til å kjøre?
+
+Enten kan du nå kjøre en av run configurationsa i `.idea/runConfigurations`, eller du kan modifisere mer manuelt:
+
+Velg URL til Kafka broker for clusteret:
+- `nav-dev-kafka-nav-dev.aivencloud.com:26484`
+- `nav-prod-kafka-nav-prod.aivencloud.com:26484`
+
+Eventuelt hent fra en pod i clusteret:
+`kubectl exec -ti <en eller annen pod> -- env | grep KAFKA_BROKER`
+
 Vi kan nå opprette en konfigurasjon i prosjektet vårt:
 
 ```kotlin
 val aivenDev = AivenConfig(
-    brokers = listOf("brokers.url.org:12345"),
-    truststorePath = "/absolute/path/to/truststore-dev.jks",
+    brokers = listOf("<URL TIL BROKER>"),
+    truststorePath = "data/truststore-dev.jks",
     truststorePw = "changeme",
-    keystorePath = "/absolute/path/to/keystore-dev.p12",
+    keystorePath = "data/keystore-dev.p12",
     keystorePw = "changeme"
 )
 ```
