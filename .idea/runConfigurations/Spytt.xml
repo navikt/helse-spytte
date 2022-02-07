@@ -3,8 +3,8 @@
     <envs>
       <env name="KAFKA_BROKERS" value="nav-dev-kafka-nav-dev.aivencloud.com:26484" />
       <env name="KAFKA_CREDSTORE_PASSWORD" value="" />
-      <env name="KAFKA_KEYSTORE_PATH" value="data/keystore.p12" />
-      <env name="KAFKA_TRUSTSTORE_PATH" value="data/truststore.p12" />
+      <env name="KAFKA_KEYSTORE_PATH" value="data/keystore-dev.p12" />
+      <env name="KAFKA_TRUSTSTORE_PATH" value="data/truststore-dev.jks" />
     </envs>
     <option name="MAIN_CLASS_NAME" value="no.nav.helse.spytte.AppKt" />
     <module name="helse-spytte.main" />

@@ -11,15 +11,15 @@ Spytter meldinger på kafka
 
 Her finner vi credentials for en `spesialist`-pod kjørende i dev-fss: 
 ```
-% k describe po spesialist-588f7cbcf-56g9k -n tbd | grep SecretName | grep aiven 
+% k describe po spesialist-588f7cbcf-56g9k -n tbd | grep SecretName | grep aiven
     SecretName:  aiven-spesialist-jgtwydre
 ```
 
 Her får vi navn på secreten vår: `aiven-spesialist-jgtwydre`. Alle secrets er definert i tilhørende gcp-kluster: 
 ```
 kx dev-gcp
-k get secret aiven-spesialist-jgtwydre -n tbd -o jsonpath='{.data.client\.keystore\.p12}' | base64 -D > keystore-prod.p12
-k get secret aiven-spesialist-jgtwydre" -n tbd -o jsonpath='{.data.client\.truststore\.jks}' | base64 -D > truststore-dev.jks
+k get secret aiven-spesialist-jgtwydre -n tbd -o jsonpath='{.data.client\.keystore\.p12}' | base64 -D > data/keystore-dev.p12
+k get secret aiven-spesialist-jgtwydre -n tbd -o jsonpath='{.data.client\.truststore\.jks}' | base64 -D > data/truststore-dev.jks
 ```
 
 Vi kan nå opprette en konfigurasjon i prosjektet vårt:

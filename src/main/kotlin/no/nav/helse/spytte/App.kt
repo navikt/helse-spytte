@@ -1,6 +1,5 @@
 package no.nav.helse.spytte
 
-import com.fasterxml.jackson.databind.MapperFeature
 import com.fasterxml.jackson.databind.SerializationFeature
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
@@ -90,18 +89,16 @@ private val mapper = jacksonObjectMapper()
 fun main() {
     val fnr = "FNR" // TODO les fra liste
 
-    val factory = ConsumerProducerFactory(AivenConfig.default)
-
     @Language("json") val json = """
         {
           "tekst": "håper ingen leser dette"
         }
     """.trimIndent()
 
-    factory.createProducer()
-        .also {
-            val record = it.send(ProducerRecord("tbd.temp-dokumenter-v1", fnr, json))
-            it.flush()
-            log.info("{}", record.isDone)
-        }
+    val producer = ConsumerProducerFactory(AivenConfig.default).createProducer()
+
+    val record = producer.send(ProducerRecord("tbd.rapid.v1", fnr, json)).get()
+    producer.close()
+
+    log.info("{}", record.toString())
 }
